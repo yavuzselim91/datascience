@@ -1,0 +1,63 @@
+---
+title: "hw1YavuzSelimEmir"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(readr)
+library(ggplot2)
+library(scales)
+library(dplyr)
+library(knitr)
+setwd("C:/Users/forbi/Desktop")
+
+UNdata_Export_20171026_130851047 <- read_csv("C:/Users/forbi/Desktop/UNdata_Export_20171026_130851047.csv")
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r UNdata_Export_20171026_130851047}
+View(UNdata_Export_20171026_130851047)
+dim(UNdata_Export_20171026_130851047)
+glimpse(UNdata_Export_20171026_130851047)
+summary(UNdata_Export_20171026_130851047)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+p1 <- ggplot(data = UNdata_Export_20171026_130851047, aes(x=Year, y=Rate))
+p1 + geom_bar(stat="identity")
+
+p3 <- ggplot(data = UNdata_Export_20171026_130851047, aes(x=Year, y=Count))
+p3 + geom_point(stat = "identity")
+
+filter1<- UNdata_Export_20171026_130851047 %>%
+  group_by(`Country or Area`) %>%
+  filter(`Country or Area`=="Turkey") %>%  ggplot(aes(x=Year, y = Count)) + geom_bar(stat = "identity")
+filter1
+
+filter2<- UNdata_Export_20171026_130851047 %>%
+  group_by(`Country or Area`) %>%
+  filter(`Country or Area`=="Luxembourg") %>%  ggplot(aes(x=Year, y = Count)) + geom_bar(stat = "identity")
+filter2
+
+filter3<- UNdata_Export_20171026_130851047 %>%
+  group_by(`Country or Area`) %>%
+  filter(`Country or Area`=="India") %>%  ggplot(aes(x=Year, y = Rate)) + geom_bar(stat = "identity")
+filter3
+
+filter4<- UNdata_Export_20171026_130851047 %>%
+  group_by(`Country or Area`) %>%
+  filter(`Country or Area`=="Brazil") %>%  ggplot(aes(x=Year, y = Count)) + geom_bar(stat = "identity")
+filter4
+```
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
